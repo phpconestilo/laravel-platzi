@@ -13,3 +13,7 @@
 
 Route::get('/', 'PagesController@home');
 
+//Route::get('/messages/{id}', 'MessageController@show');
+Route::get('/messages/{message}', 'MessageController@show');
+
+
