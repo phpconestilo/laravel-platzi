@@ -12,5 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $teacher = 'Alejandro González Reyes';
+    $links = [
+        'http://platzi.com' => 'Platzi',
+        'http://laravel.com' => 'Laravel',
+    ];
+
+    return view('welcome', [
+        'teacher' => $teacher,
+        'links' => $links,
+    ]);
+});
+
+Route::get('/acerca', function () {
+    //return 'Acerca de nosotros';
+    return view('about');
 });

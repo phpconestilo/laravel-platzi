@@ -81,19 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laratter by Platzi
-                </div>
-
-                @isset($teacher)
-                    <p>Profesor: {{ $teacher }}</p>
-                @else
-                    <p>Profesor por definir</p>
-                @endisset
-
-                <div class="links">
-                    @foreach ($links as $link => $text)
-                        <a href="{{ $link }}" target="_blank">{{ $text }}</a>
-                    @endforeach
+                    Acerca de Nosotros
                 </div>
             </div>
         </div>
