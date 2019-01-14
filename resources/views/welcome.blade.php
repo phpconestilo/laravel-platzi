@@ -7,7 +7,7 @@
 --}}
 @section('content')
     <div class="title m-b-md">
-        Laratter by Platzi
+        Laratter by <strong>Platzi</strong>
     </div>
 
     @isset($teacher)
