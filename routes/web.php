@@ -17,3 +17,7 @@ Route::get('/', 'PagesController@home');
 Route::get('/messages/{message}', 'MessageController@show');
 
 Route::post('/messages/create', 'MessageController@create');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
