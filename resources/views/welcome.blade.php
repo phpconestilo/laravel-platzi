@@ -41,6 +41,15 @@
         @empty
             <p>No hay mensajes destacados.</p>
         @endforelse
+
+        @if(count($messages))
+            <div class="mx-auto mt-5">
+                {{-- El método links lo tengo disponible siempre y cuando le indique que los resultads
+                    de la busqueda en el Modelo los debe arrojar paginados, de lo contrario
+                    este metodo no existe y llamarlo marcaría un error --}}
+                {{ $messages->links() }}
+            </div>
+        @endif
     </div>
 @endsection
                 
