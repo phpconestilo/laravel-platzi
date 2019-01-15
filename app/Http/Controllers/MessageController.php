@@ -25,4 +25,9 @@ class MessageController extends Controller
         //Es importante aclarar que RouteModelBinding exige que el parametro de ruta y argumento de la función deben concidir en cuanto nombre
         return view('messages.show', compact('message'));
     }
+
+    public function create(Request $request)
+    {
+        dd($request->all());
+    }
 }
