@@ -31,22 +31,24 @@
     </div>
     <div class="row">
         @forelse ($messages as $message)
-            <div class="col-6">
+            <div class="col-4">
                 {{-- Incluir un partial en esta sección de mi vista --}}
                 @include('messages.partial_message')
             </div>
         @empty
             <p>No hay mensajes destacados.</p>
         @endforelse
-
-        @if(count($messages))
-            <div class="mx-auto mt-5">
+    </div>
+    
+    @if(count($messages))
+        <div class="row">
+            <div class="mx-auto mt-5">            
                 {{-- El método links lo tengo disponible siempre y cuando le indique que los resultads
                     de la busqueda en el Modelo los debe arrojar paginados, de lo contrario
                     este metodo no existe y llamarlo marcaría un error --}}
                 {{ $messages->links() }}
             </div>
-        @endif
-    </div>
+        </div>
+    @endif
 @endsection
                 

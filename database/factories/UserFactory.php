@@ -19,7 +19,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         
         //Añadimos nuestros campos personalizados al faker del usuario
-        'username' => $faker->userName,
+        'username' => '@'.$faker->userName,
         'avatar' => $faker->imageUrl(30, 30),
 
         'email_verified_at' => now(),

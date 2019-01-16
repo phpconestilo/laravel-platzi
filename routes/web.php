@@ -25,3 +25,13 @@ Route::post('/messages/create', 'MessageController@create')->middleware('auth');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/**
+ * Esto no es un route model binding
+ * sino que el username es un texto simple que pasaremos al controlador
+ * Lo agrego en esta zona debido a que por orden entra en conflicto con la ruta
+ * de autenticación y registros
+ */
+Route::get('{username}', 'UserController@show');
+
+

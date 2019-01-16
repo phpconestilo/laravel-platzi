@@ -11,8 +11,9 @@ class PagesController extends Controller
     {
         /**
          * Paginamos los resultados devueltos de 10 en 10
+         * ordenados por el más reciente
          */
-        $messages = Message::paginate(10);
+        $messages = Message::latest()->paginate(10);
 
         return view('welcome', [
             'messages' => $messages,

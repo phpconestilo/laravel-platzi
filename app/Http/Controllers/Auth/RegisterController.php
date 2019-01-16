@@ -84,7 +84,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
 
             //Es lo mismo que $data->get() o $data->input()
-            'username' => $data['username'],
+            'username' => '@'.$data['username'],
             'avatar' => 'http://lorempixel.com/300/300/people?'.random_int(1, 1000),
         ]);
     }
