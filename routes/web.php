@@ -13,10 +13,14 @@
 
 Route::get('/', 'PagesController@home');
 
-//Route::get('/messages/{id}', 'MessageController@show');
 Route::get('/messages/{message}', 'MessageController@show');
 
-Route::post('/messages/create', 'MessageController@create');
+/**
+ * Esta ruta se encuentra protegida
+ * Solo pueden acceder aquellos usuarios que estén actualmente autenticados
+ * en el sistema
+ */
+Route::post('/messages/create', 'MessageController@create')->middleware('auth');
 
 Auth::routes();
 

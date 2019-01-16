@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Message;
+use App\User;
 
 class MessageTableSeeder extends Seeder
 {
@@ -23,6 +24,16 @@ class MessageTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Message::class, 80)->create();
+        /**
+         * Se crean 10 usuarios, por cada usuario creado se ejecuta
+         * una función con el usuario actual y
+         * a continuación se crean 20 mensajes, pasando el id del usuario actual 
+         */
+        factory(User::class, 10)->create()->each(function(User $user){
+            factory(Message::class, 20)->create([
+                'user_id' => $user->id
+            ]);
+        });
+        
     }
 }
