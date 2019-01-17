@@ -36,5 +36,10 @@ Route::get('{username}', 'UserController@show');
 
 //Ruta para saber a quien sigue este usuario
 Route::get('{username}/follows', 'UserController@follows');
+//Ruta para saber quienes siguen a este usuario
+Route::get('{username}/followed', 'UserController@followed');
+
 //Para registrar a quien quiero seguir
 Route::post('/{username}/follow', 'UserController@follow');
+//Para registrar a quien quiero dejar de seguir
+Route::post('/{username}/unfollow', 'UserController@unfollow');
