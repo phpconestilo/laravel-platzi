@@ -5,6 +5,17 @@
 <div class="mt-5">
     <h1>Perfil de: <strong>{{ $user->name }}</strong></h1>
     <p>Socio activo en la plataforma {{ config('app.name', 'Laragon') }}</p>
+    
+    {{--Mostrar un boton dentro de un formulario para decirle a la aplicación
+        que este usuario autenticado quiere seguir a este usuario en particular--}}
+    <form action="/{{ $user->username }}/follow" method="POST">
+        {{ csrf_field() }}
+        <button class="btn btn-primary">Follow [Seguir]</button>
+    </form>
+
+    @if(session('success'))
+        <div class="text-success">{{ session('success')}}</div>
+    @endif
 
     <div class="row">
         {{-- 

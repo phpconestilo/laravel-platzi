@@ -34,4 +34,7 @@ Route::get('/home', 'HomeController@index')->name('home');
  */
 Route::get('{username}', 'UserController@show');
 
-
+//Ruta para saber a quien sigue este usuario
+Route::get('{username}/follows', 'UserController@follows');
+//Para registrar a quien quiero seguir
+Route::post('/{username}/follow', 'UserController@follow');

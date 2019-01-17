@@ -7,17 +7,6 @@ use App\User;
 class MessageTableSeeder extends Seeder
 {
     /**
-     * PASO 2
-     * 
-     * En segundo lugar se crea un semillero de información mediante el comando artisan
-     * php artisan make:seeder ModelnameTableSeeder
-     * 
-     * Dentto de este se invoca a la función globla factory pasandole como parametro
-     * el nombre del modelo, como segundo parametro la cantidad de registros
-     * y finalmente se invoca su metodo create para guardar esa
-     * información generada dentro de la base de datos
-     * 
-     * 
      * Run the database seeds.
      *
      * @return void
@@ -25,14 +14,25 @@ class MessageTableSeeder extends Seeder
     public function run()
     {
         /**
-         * Se crean 10 usuarios, por cada usuario creado se ejecuta
-         * una función con el usuario actual y
-         * a continuación se crean 20 mensajes, pasando el id del usuario actual 
+         *Guardamos una colección de 40 usuarios creados en la base de datos
          */
-        factory(User::class, 10)->create()->each(function(User $user){
+        $users = factory(User::class, 40)->create();
+        
+        /**
+         * Recorremos esa colección de usuarios, y por cada uno de ellos le generamos
+         * un total de 20 mensajes a cada uno.
+         * 
+         * Le damos acceso interno en la función a la variable externa $users
+         * use($variable_externa)
+         */
+        $users->each(function(User $user) use ($users){
             factory(Message::class, 20)->create([
                 'user_id' => $user->id
             ]);
+
+            //a este usuario en turno le asigno unos usuarios para que los siga
+            //random en una colección devuelve un arreglo con la cantidad de valores asignados
+            $user->follows()->sync($users->random(10));
         });
         
     }

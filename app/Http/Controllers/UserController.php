@@ -9,20 +9,40 @@ class UserController extends Controller
 {
     public function show($username)
     {
-        /**
-         * Buscar a un usuario con username igual al pasado como parametro
-         * De los resultados me quedo con el primero
-         * get() con todos los encontrados
-         */
-        $user = User::where('username', $username)->first();
-
-        /**
-         * En caso de querer mostrar todos los mensajes de este usuario de manera paginada
-         * es necesario hacer aqui la consulta
-         */
-        //$messages = $user->messages()->paginate(5);
-        //return view('users.show', compact('user', 'messages'));
-
+        $user = $this->getByUsername($username);
         return view('users.show', compact('user'));
     }
+
+    /**
+     * Método para saber a quién sigue este usuario declarado en la url 
+     */
+    public function follows($username)
+    {
+        $user = $this->getByUsername($username);
+        return view('users.follows', compact('user'));
+    }
+
+
+    public function follow($username, Request $request)
+    {
+        //Buscamos al usuario que queremos seguir
+        $user = $this->getByUsername($username);
+        //Ahora me localizo a mi
+        $me = $request->user();
+        //Yo ahora sego a el usuario buscado
+        //Se usa la relación muchos a muchos donde yo (user_id) soy el principal
+        //$me->follows()->attach($user);
+        $me->follows()->syncWithoutDetaching($user);
+        
+        return redirect()->back()->withSuccess('Usuario seguido satisfacotiramente');
+    }
+
+    /**
+     * Método privado de utilidad para buscar usuarios por su username
+     */
+    private function getByUsername($username)
+    {
+        return User::where('username', $username)->first();
+    }
+
 }

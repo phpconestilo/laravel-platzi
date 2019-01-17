@@ -49,18 +49,33 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * Este usuario tiene muchos mensajes asociados a su cuenta
-     * 
-     * lo que indica que el modelo Message tiene un campo foraneo
-     * llamado user_id que se relaciona con el campo id de este modelo (User)
-     */
     public function messages()
     {
-        //return $this->hasMany(Message::class);
-
-        //ordenar los datos por fecha de creación en forma decreciente
-        //del mas reciente al mas antigüo
         return $this->hasMany(Message::class)->orderBy('created_at', 'desc');
     }
+
+    /**
+     * Este usuario sigue a.... muchos usuarios
+     */
+    public function follows()
+    {
+        /**
+         * Yo usuario identificado como user_id, en la tabla pivote (followers) 
+         * sigo a muchos usuarios identificados como followed_id
+         */
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'followed_id');
+    }
+
+    /**
+     * Este usuario es seguido por..... muchos usuarios
+     */
+    public function followers()
+    {
+        /**
+         * Todos los usuarios en la tabla pivote(followers) identificados
+         * por followed_id que tengan mi user_id, (me siguen)...
+         */
+        return $this->belongsToMany(User::class, 'followers', 'followed_id', 'user_id');
+    }
+
 }
